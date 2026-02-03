@@ -6,7 +6,7 @@ import { AnalyticsChart } from "@/components/AnalyticsChart";
 import { QuoteWidget } from "@/components/QuoteWidget";
 import { FocusAudio } from "@/components/FocusAudio";
 import { Skeleton } from "@/components/ui/skeleton";
-import { ActivityHeatmap } from "@/components/ActivityHeatmap";
+
 import { useStore } from "@/lib/store";
 import { CheckCircle2, Circle } from "lucide-react";
 
@@ -95,10 +95,6 @@ export default function DashboardPage() {
                         <div className="w-full mt-4 flex flex-col gap-8">
                             <div className="h-[200px] w-full">
                                 <AnalyticsChart />
-                            </div>
-                            <div>
-                                <h4 className="text-sm font-medium text-muted-foreground mb-4">Yearly Focus Map</h4>
-                                <ActivityHeatmap />
                             </div>
                         </div>
                     )}
