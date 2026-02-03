@@ -9,6 +9,7 @@ import { Progress } from "@/components/ui/progress";
 import { useStore } from "@/lib/store";
 import { Goal, Task } from "@/lib/types";
 import { cn } from "@/lib/utils";
+import { triggerConfetti, triggerMicroConfetti } from "@/lib/confetti";
 
 export function GoalTracker() {
     const { goals, addGoal, addTaskToGoal, toggleTaskCompletion, removeGoal } = useStore();
@@ -65,8 +66,14 @@ export function GoalTracker() {
 
                 <div className="space-y-4">
                     {goals.length === 0 && (
-                        <div className="text-center p-8 border rounded-xl border-dashed text-muted-foreground">
-                            No goals set yet. Start by creating one!
+                        <div className="text-center p-8 border rounded-xl border-dashed bg-slate-50/50 dark:bg-slate-900/50 flex flex-col items-center justify-center gap-3">
+                            <div className="h-12 w-12 rounded-full bg-indigo-100 dark:bg-indigo-900/50 flex items-center justify-center">
+                                <Trophy className="h-6 w-6 text-indigo-600 dark:text-indigo-400" />
+                            </div>
+                            <div className="space-y-1">
+                                <p className="font-semibold text-muted-foreground">No goals set yet</p>
+                                <p className="text-sm text-muted-foreground/80">Start by creating your first macro goal above!</p>
+                            </div>
                         </div>
                     )}
 
@@ -108,7 +115,10 @@ export function GoalTracker() {
                                             <div
                                                 key={task.id}
                                                 className="flex items-center gap-2 text-sm cursor-pointer group"
-                                                onClick={() => toggleTaskCompletion(goal.id, task.id)}
+                                                onClick={() => {
+                                                    if (!task.isCompleted) triggerMicroConfetti();
+                                                    toggleTaskCompletion(goal.id, task.id)
+                                                }}
                                             >
                                                 <div className={cn("h-4 w-4 shrink-0 rounded-full border flex items-center justify-center transition-colors", task.isCompleted ? "bg-emerald-500 border-emerald-500" : "border-slate-300 group-hover:border-emerald-400")}>
                                                     {task.isCompleted && <CheckCircle2 className="h-3 w-3 text-white" />}

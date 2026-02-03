@@ -5,6 +5,7 @@ import { Play, Pause, RotateCcw, MonitorPlay } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useStore } from "@/lib/store";
+import { triggerConfetti } from "@/lib/confetti";
 
 export function PomodoroTimer({ className }: { className?: string }) {
     const [timeLeft, setTimeLeft] = useState(25 * 60);
@@ -22,6 +23,7 @@ export function PomodoroTimer({ className }: { className?: string }) {
             setIsRunning(false);
             if (mode === 'focus') {
                 addFocusTime(25); // Add 25 minutes
+                triggerConfetti();
             }
         }
         return () => clearInterval(interval);

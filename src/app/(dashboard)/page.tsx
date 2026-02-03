@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { AnalyticsChart } from "@/components/AnalyticsChart";
+import { QuoteWidget } from "@/components/QuoteWidget";
 import { useStore } from "@/lib/store";
 import { CheckCircle2, Circle } from "lucide-react";
 
@@ -39,6 +40,8 @@ export default function DashboardPage() {
                 <h1 className="text-3xl font-bold tracking-tight">Command Center</h1>
                 <p className="text-muted-foreground">Welcome back, {user?.name || 'Student'}. Here's your overview.</p>
             </div>
+
+            <QuoteWidget />
 
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
                 <div className="rounded-xl border bg-card text-card-foreground shadow p-6">
@@ -80,7 +83,13 @@ export default function DashboardPage() {
                                 </div>
                             </div>
                         )) : (
-                            <p className="text-muted-foreground text-sm">No tasks scheduled for today.</p>
+                            <div className="flex flex-col items-center justify-center h-[200px] text-center p-4">
+                                <div className="h-12 w-12 rounded-full bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center mb-3">
+                                    <CheckCircle2 className="h-6 w-6 text-emerald-600 dark:text-emerald-400" />
+                                </div>
+                                <p className="font-medium">All caught up!</p>
+                                <p className="text-sm text-muted-foreground mt-1">No tasks scheduled for the rest of today.</p>
+                            </div>
                         )}
                     </div>
                 </div>
