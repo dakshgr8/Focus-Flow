@@ -1,4 +1,5 @@
 import { Sidebar } from "@/components/Sidebar";
+import { MobileNav } from "@/components/MobileNav";
 import { ZenModeOverlay } from "@/components/ZenModeOverlay";
 import { PomodoroTimer } from "@/components/PomodoroTimer";
 import { DashboardHeader } from "@/components/DashboardHeader";
@@ -12,8 +13,11 @@ export default function DashboardLayout({
         <div className="min-h-screen bg-slate-50 dark:bg-slate-950 font-sans">
             <div className="absolute inset-0 bg-grid-slate-200 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))] dark:bg-grid-slate-800 pointer-events-none fixed" />
             <Sidebar />
-            <main className="pl-0 md:pl-64 min-h-screen relative z-10 transition-all duration-300 flex flex-col">
-                <DashboardHeader />
+            <MobileNav />
+            <main className="pl-0 md:pl-64 min-h-screen relative z-10 transition-all duration-300 flex flex-col pt-16 md:pt-0">
+                <div className="hidden md:block">
+                    <DashboardHeader />
+                </div>
                 <div className="container mx-auto p-4 md:p-8 pt-6 max-w-7xl space-y-8 flex-1">
                     {children}
                 </div>
