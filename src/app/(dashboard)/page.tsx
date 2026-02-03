@@ -69,7 +69,7 @@ export default function DashboardPage() {
                         <h3 className="tracking-tight text-sm font-medium text-muted-foreground">Hours Focused</h3>
                         <div className="text-2xl font-bold mt-2">{hoursFocused}h</div>
                     </div>
-                    <div className="rounded-xl border bg-card text-card-foreground shadow p-6">
+                    <div id="goal-tracker" className="rounded-xl border bg-card text-card-foreground shadow p-6">
                         <h3 className="tracking-tight text-sm font-medium text-muted-foreground">Goals Completed</h3>
                         <div className="text-2xl font-bold mt-2">{tasksCompleted}/{goals.length}</div>
                     </div>

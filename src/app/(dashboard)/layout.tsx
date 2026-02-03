@@ -21,7 +21,7 @@ export default function DashboardLayout({
                 <div className="container mx-auto p-4 md:p-8 pt-6 max-w-7xl space-y-8 flex-1">
                     {children}
                 </div>
-                <div className="fixed bottom-20 right-4 z-40 md:bottom-6 md:right-6 origin-bottom-right scale-90 md:scale-100">
+                <div id="pomodoro-timer" className="fixed bottom-20 right-4 z-40 md:bottom-6 md:right-6 origin-bottom-right scale-90 md:scale-100">
                     <PomodoroTimer className="shadow-2xl border-indigo-200 dark:border-indigo-900 bg-white/90 dark:bg-slate-900/90 backdrop-blur" />
                 </div>
 

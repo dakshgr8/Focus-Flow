@@ -59,6 +59,67 @@
     --chart-5: 340 75% 55%;
 }
 
+.cyberpunk {
+    --background: 260 50% 10%;
+    /* Dark Purple */
+    --foreground: 60 100% 50%;
+    /* Neon Yellow */
+    --card: 260 50% 15%;
+    --card-foreground: 60 100% 50%;
+    --popover: 260 50% 10%;
+    --popover-foreground: 60 100% 50%;
+    --primary: 320 100% 55%;
+    /* Neon Pink */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 190 100% 50%;
+    /* Neon Blue */
+    --secondary-foreground: 260 50% 10%;
+    --muted: 260 50% 20%;
+    --muted-foreground: 190 100% 50%;
+    --accent: 320 100% 55%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 100% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 190 100% 50%;
+    --input: 190 100% 50%;
+    --ring: 320 100% 55%;
+    --chart-1: 320 100% 55%;
+    --chart-2: 60 100% 50%;
+    --chart-3: 190 100% 50%;
+    --chart-4: 280 100% 60%;
+    --chart-5: 0 100% 60%;
+}
+
+.pink {
+    --background: 350 100% 98%;
+    /* Very Light Pink */
+    --foreground: 350 50% 20%;
+    /* Dark Pink-Red */
+    --card: 0 0% 100%;
+    --card-foreground: 350 50% 20%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 350 50% 20%;
+    --primary: 340 82% 52%;
+    /* Rose */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 350 60% 90%;
+    --secondary-foreground: 340 82% 52%;
+    --muted: 350 30% 96%;
+    --muted-foreground: 350 20% 60%;
+    --accent: 350 60% 90%;
+    --accent-foreground: 340 82% 52%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 350 30% 90%;
+    --input: 350 30% 90%;
+    --ring: 340 82% 52%;
+    --chart-1: 340 82% 52%;
+    --chart-2: 10 80% 60%;
+    --chart-3: 320 40% 60%;
+    --chart-4: 280 50% 60%;
+    --chart-5: 20 60% 60%;
+}
+
 @theme inline {
     --color-background: hsl(var(--background));
     --color-foreground: hsl(var(--foreground));

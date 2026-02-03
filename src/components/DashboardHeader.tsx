@@ -5,6 +5,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useStore } from "@/lib/store";
 
+import { TourGuide } from "@/components/TourGuide";
+import { ThemeSwitcher } from "@/components/ThemeSwitcher";
+
 export function DashboardHeader() {
     const { user } = useStore();
 
@@ -28,6 +31,13 @@ export function DashboardHeader() {
                     <div className="hidden md:flex items-center gap-2 text-sm text-muted-foreground">
                         <span>{user?.name || 'Student'}</span>
                     </div>
+
+                    <div id="theme-switcher">
+                        <ThemeSwitcher />
+                    </div>
+
+                    <TourGuide />
+
                     <Button variant="ghost" size="icon" className="rounded-full">
                         <Bell className="h-5 w-5" />
                         <span className="sr-only">Notifications</span>
