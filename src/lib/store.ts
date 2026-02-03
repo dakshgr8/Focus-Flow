@@ -94,14 +94,14 @@ export const useStore = create<AppState>()(
             })),
 
             addFocusTime: (minutes) => set((state) => {
-                const today = new Date().toLocaleDateString('en-US', { weekday: 'short' });
+                const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
                 const currentDaily = state.dailyFocusHistory?.[today] || 0;
 
                 return {
                     totalFocusTime: state.totalFocusTime + minutes,
                     dailyFocusHistory: {
                         ...state.dailyFocusHistory,
-                        [today]: currentDaily + (minutes / 60) // Store in hours for chart, or minutes and convert later. Let's store minutes for precision and convert in UI.
+                        [today]: currentDaily + minutes // Store minutes
                     }
                 };
             }),

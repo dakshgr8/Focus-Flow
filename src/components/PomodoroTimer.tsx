@@ -6,12 +6,21 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useStore } from "@/lib/store";
 import { triggerConfetti } from "@/lib/confetti";
+import { useNotification } from "@/hooks/useNotification";
 
 export function PomodoroTimer({ className }: { className?: string }) {
     const [timeLeft, setTimeLeft] = useState(25 * 60);
     const [isRunning, setIsRunning] = useState(false);
     const [mode, setMode] = useState<'focus' | 'break'>('focus');
     const { toggleZenMode, isZenMode, addFocusTime } = useStore();
+
+    const { permission, requestPermission, showNotification } = useNotification();
+
+    useEffect(() => {
+        if (permission === 'default') {
+            requestPermission();
+        }
+    }, [permission, requestPermission]);
 
     useEffect(() => {
         let interval: NodeJS.Timeout;
@@ -24,10 +33,14 @@ export function PomodoroTimer({ className }: { className?: string }) {
             if (mode === 'focus') {
                 addFocusTime(25); // Add 25 minutes
                 triggerConfetti();
+                showNotification("Focus Session Complete!", {
+                    body: "Great job! Take a break.",
+                    icon: "/icon.png"
+                });
             }
         }
         return () => clearInterval(interval);
-    }, [isRunning, timeLeft, mode, addFocusTime]);
+    }, [isRunning, timeLeft, mode, addFocusTime, showNotification]);
 
     const toggleTimer = () => setIsRunning(!isRunning);
 
