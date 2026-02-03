@@ -8,10 +8,14 @@ import { useStore } from "@/lib/store";
 import { triggerConfetti } from "@/lib/confetti";
 import { useNotification } from "@/hooks/useNotification";
 
+import { PlantGrowth } from "@/components/PlantGrowth";
+
 export function PomodoroTimer({ className }: { className?: string }) {
     const [timeLeft, setTimeLeft] = useState(25 * 60);
+    const [initialTime, setInitialTime] = useState(25 * 60);
     const [isRunning, setIsRunning] = useState(false);
     const [mode, setMode] = useState<'focus' | 'break'>('focus');
+    const [isWithered, setIsWithered] = useState(false);
     const { toggleZenMode, isZenMode, addFocusTime } = useStore();
 
     const { permission, requestPermission, showNotification } = useNotification();
@@ -42,9 +46,20 @@ export function PomodoroTimer({ className }: { className?: string }) {
         return () => clearInterval(interval);
     }, [isRunning, timeLeft, mode, addFocusTime, showNotification]);
 
-    const toggleTimer = () => setIsRunning(!isRunning);
+    const toggleTimer = () => {
+        if (!isRunning && isWithered) {
+            // Reset wither if starting new
+            setIsWithered(false);
+            setTimeLeft(mode === 'focus' ? 25 * 60 : 5 * 60);
+        }
+        setIsRunning(!isRunning);
+    }
 
     const resetTimer = () => {
+        if (isRunning && mode === 'focus' && timeLeft < initialTime && timeLeft > 0) {
+            // User gave up
+            setIsWithered(true);
+        }
         setIsRunning(false);
         setTimeLeft(mode === 'focus' ? 25 * 60 : 5 * 60);
     };
@@ -53,7 +68,10 @@ export function PomodoroTimer({ className }: { className?: string }) {
         const newMode = mode === 'focus' ? 'break' : 'focus';
         setMode(newMode);
         setIsRunning(false);
-        setTimeLeft(newMode === 'focus' ? 25 * 60 : 5 * 60);
+        setIsWithered(false);
+        const newTime = newMode === 'focus' ? 25 * 60 : 5 * 60;
+        setTimeLeft(newTime);
+        setInitialTime(newTime);
     };
 
     const formatTime = (seconds: number) => {
@@ -61,6 +79,9 @@ export function PomodoroTimer({ className }: { className?: string }) {
         const secs = seconds % 60;
         return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
     };
+
+    // Calculate progress
+    const progress = Math.min(100, Math.max(0, ((initialTime - timeLeft) / initialTime) * 100));
 
     return (
         <div className={cn("bg-card border rounded-xl p-4 shadow-lg flex flex-col items-center gap-3", className)}>
@@ -71,12 +92,18 @@ export function PomodoroTimer({ className }: { className?: string }) {
                 <button onClick={switchMode} className="text-xs text-muted-foreground hover:underline">Switch</button>
             </div>
 
-            <div className="text-4xl font-mono font-bold tracking-widest">
+            {mode === 'focus' && (
+                <div className="-my-2">
+                    <PlantGrowth progress={progress} isWithered={isWithered} />
+                </div>
+            )}
+
+            <div className="text-4xl font-mono font-bold tracking-widest relative z-10">
                 {formatTime(timeLeft)}
             </div>
 
-            <div className="flex items-center gap-2">
-                <Button variant="outline" size="icon" onClick={resetTimer}>
+            <div className="flex items-center gap-2 relative z-10">
+                <Button variant="outline" size="icon" onClick={resetTimer} title={isRunning ? "Give Up (Wither Plant)" : "Reset"}>
                     <RotateCcw className="h-4 w-4" />
                 </Button>
                 <Button
