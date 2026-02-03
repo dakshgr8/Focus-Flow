@@ -8,9 +8,9 @@ import { cn } from "@/lib/utils";
 import { Card, CardContent } from "@/components/ui/card";
 
 const SOUNDS = [
-    { id: 'rain', label: 'Rain', icon: CloudRain, file: '/sounds/rain.mp3' },
-    { id: 'cafe', label: 'Cafe', icon: Coffee, file: '/sounds/cafe.mp3' },
-    { id: 'lofi', label: 'Lofi', icon: Music, file: '/sounds/lofi.mp3' },
+    { id: 'rain', label: 'Rain', icon: CloudRain, file: 'https://cdn.pixabay.com/download/audio/2022/03/24/audio_03d651a5c6.mp3' },
+    { id: 'cafe', label: 'Cafe', icon: Coffee, file: 'https://cdn.pixabay.com/download/audio/2022/01/18/audio_d0a13f69d2.mp3' }, // Coffee shop ambience
+    { id: 'lofi', label: 'Lofi', icon: Music, file: 'https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3' }, // Chill lofi
 ];
 
 export function FocusAudio() {
